@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "clear && nodemon ",
-    "seed": "clear && node "
+    "start": "clear && nodemon ./server/index.js",
+    "seed": "clear && npx prisma migrate reset --force && node ./server/seed.js"
   },
   "keywords": [],
   "author": "",
