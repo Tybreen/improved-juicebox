@@ -18,7 +18,7 @@ router.post(`/register`, async (req, res, next) => {
       }
     });
 
-    const token = jwt.sign({ username }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET);
 
     res.status(201).send({ token });
   } catch ({ name, message }) {
@@ -40,7 +40,7 @@ router.post(`/login`, async (req, res, next) => {
       const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
       if (isPasswordCorrect) {
-        const token = jwt.sign({ username }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET);
         res.status(200).send({ token });
       } else {
         res.status(401).send("Invalid login credentials.");
